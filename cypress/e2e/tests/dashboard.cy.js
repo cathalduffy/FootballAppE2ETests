@@ -13,13 +13,14 @@ describe('Dashboard page tests', () => {
       cy.xpath(`//button[text()='Login']`).click()
     })
     it('Verify that team cards are visible to user', () => {  
-        cy.xpath(`//*[text()='Arsenal']`).should('have.text', 'Arsenal')
- 
+        cy.xpath(`//*[text()='Arsenal']`)
+        .should('have.text', 'Arsenal')
     })
 
-    // it('Verify that team images are visible to user', () => {   
-    //     cy.get('#root > div > div > div.card-body > div:nth-child(1) > input').type(`${email}`)
-    // })
+    it('Verify that team images are visible to user', () => {   
+        cy.xpath(`//*[text()='Arsenal']/parent::div/parent::div/following-sibling::div`)
+        .should('be.visible')
+    })
     // it('Verify functionality of League dropdown menu', () => {   
     //     cy.get('#root > div > div > div.card-body > div:nth-child(1) > input').type(`${email}`)
     // })
@@ -28,6 +29,7 @@ describe('Dashboard page tests', () => {
     // })
 
     afterEach(() => {
+      cy.xpath(`//a[text()='Logout']`).click()
       cy.clearCookies()
     })
 
