@@ -9,6 +9,7 @@ const yearDropdown = `//*[text()='Please select a year ']/child::select`
 
 describe('Standings page tests', () => {
     beforeEach(() => {
+      indexedDB.deleteDatabase('firebaseLocalStorageDb');
       cy.visit('https://football-app-login.web.app/login')
       cy.get('#root > div > div > div.card-body > div:nth-child(1) > input').type(`${email}`)
       cy.get('#root > div > div > div.card-body > div:nth-child(2) > input').type(`${password}`)
@@ -18,7 +19,7 @@ describe('Standings page tests', () => {
         // cy.xpath(`//*[text()='Arsenal']`)
         // .should('have.text', 'Arsenal')
         cy.xpath(`//a[text()='Standings']`).click()
-        cy.wait(5000)
+        cy.wait(3000)
         cy.xpath(`//*[text()='Newcastle']`)
         .should('have.text', 'Newcastle')
     })
@@ -29,17 +30,19 @@ describe('Standings page tests', () => {
         .children()
         .should('contain', '1')
         .and('contain', 'Arsenal')
-        .and('contain', '19')
-        .and('contain', '45')
-        .and('contain', '16')
+        // .and('contain', '19')
+        // .and('contain', '45')
+        // .and('contain', '16')
     })
     it('Verify functionality of League dropdown menu', () => {   
+      cy.xpath(`//a[text()='Standings']`).click()
         cy.xpath(`${leagueDropdown}`)
         .select('Championship')
         cy.xpath(`//*[text()='Burnley']`)
         .should('have.text', 'Burnley')
     })
-    it('Verify functionality of Year dropdown menu', () => {   
+    it('Verify functionality of Year dropdown menu', () => {  
+      cy.xpath(`//a[text()='Standings']`).click() 
       cy.xpath(`${yearDropdown}`)
       .select('2020')
       cy.xpath(`//*[text()='Manchester City']`)

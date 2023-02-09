@@ -9,6 +9,7 @@ const yearDropdown = `//*[text()='Please select a year ']/child::select`
 
 describe('Dashboard page tests', () => {
     beforeEach(() => {
+      indexedDB.deleteDatabase('firebaseLocalStorageDb');
       cy.visit('https://football-app-login.web.app/login')
       cy.get('#root > div > div > div.card-body > div:nth-child(1) > input').type(`${email}`)
       cy.get('#root > div > div > div.card-body > div:nth-child(2) > input').type(`${password}`)
