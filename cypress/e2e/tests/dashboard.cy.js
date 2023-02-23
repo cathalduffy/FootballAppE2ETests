@@ -9,11 +9,9 @@ const yearDropdown = `//*[text()='Please select a year ']/child::select`
 
 describe('Dashboard page tests', () => {
     beforeEach(() => {
-      indexedDB.deleteDatabase('firebaseLocalStorageDb');
       cy.visit('https://football-app-login.web.app/login')
-      cy.get('#root > div > div > div.card-body > div:nth-child(1) > input').type(`${email}`)
-      cy.get('#root > div > div > div.card-body > div:nth-child(2) > input').type(`${password}`)
-      cy.xpath(`//button[text()='Login']`).click()
+      cy.login();
+      cy.visit('https://football-app-login.web.app/dashboard')
     })
     it('Verify that team cards are visible to user', () => {  
         cy.xpath(`//*[text()='Arsenal']`)
@@ -38,8 +36,10 @@ describe('Dashboard page tests', () => {
   })
 
     afterEach(() => {
-      cy.xpath(`//a[text()='Logout']`).click()
-      cy.clearCookies()
+      // cy.xpath(`//a[text()='Logout']`).click()
+      // cy.clearCookies()
+      indexedDB.deleteDatabase('firebaseLocalStorageDb');
+      // cy.logout
     })
 
   })

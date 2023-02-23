@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^12.3.0",
-    "cypress-firebase": "^3.0.1",
+    "cypress-firebase": "^2.2.5",
     "cypress-slow-down": "^1.2.1",
     "cypress-xpath": "^2.0.1",
     "firebase-admin": "^11.5.0"
